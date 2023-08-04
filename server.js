@@ -211,17 +211,31 @@ app.get("/students/delete/:studentNum", (req, res) => {
 ///////courses///////
 
 app.get("/courses", (req, res) => {
-    data.getCourses()
-        .then((data) => {
-            if (data.length > 0) {
-                res.render("courses", { courses: data });
-            } else {
-                res.render("courses", { message: "No results" });
-            }
-        })
-        .catch((err) => {
-            res.render("courses", { message: "Error fetching courses" });
-        });
+    if (req.query.course) {
+        data.getCourses(req.query.course)
+            .then((data) => {
+                if (data.length > 0) {
+                    res.render("courses", { courses: data });
+                } else {
+                    res.render("courses", { message: "No results" });
+                }
+            })
+            .catch((err) => {
+                res.render("courses", { message: "Error fetching students" });
+            });
+    } else {
+        data.getAllCourses()
+            .then((data) => {
+                if (data.length > 0) {
+                    res.render("courses", { courses: data });
+                } else {
+                    res.render("courses", { message: "No results" });
+                }
+            })
+            .catch((err) => {
+                res.render("courses", { message: "Error fetching students" });
+            });
+    }
 });
 
 
