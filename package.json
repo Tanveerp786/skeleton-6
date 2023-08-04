@@ -21,11 +21,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tanveerp786/app-6.git"
+    "url": "git+https://github.com/Tanveerp786/skeleton-6.git"
   },
   "bugs": {
-    "url": "https://github.com/Tanveerp786/app-6/issues"
+    "url": "https://github.com/Tanveerp786/skeleton-6/issues"
   },
-  "homepage": "https://github.com/Tanveerp786/app-6#readme",
+  "homepage": "https://github.com/Tanveerp786/skeleton-6#readme",
   "description": ""
 }
