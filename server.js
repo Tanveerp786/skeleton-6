@@ -151,10 +151,8 @@ app.get("/students/add", (req, res) => {
 });
 
 app.post("/students/add",(req,res) => {
-    data.getCourses()
-    .then(data => res.render("addStudent", {courses: data}))    
-    .catch((err) => {
-        res.render("addStudent", {courses: []});
+    data.addStudent(req.body).then(()=>{
+        res.redirect("/students");
     });
 });
 
@@ -350,7 +348,28 @@ app.get("/logout", function(req, res) {
     res.redirect("/login");
   });
 
+  app.get("/login", (req, res) => {
+    // Check if the user is already logged in
+    if (req.session.user) {
+        res.render("login", { isLoggedIn: true, username: req.session.user.username });
+    } else {
+        res.render("login", { isLoggedIn: false });
+    }
+});
 
+app.post("/login", (req,res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    if (username === "" || password === "") {
+        return res.render("/login", {errorMsg: "Missing Credentials."});
+    }
+    if(username === user.username && password === user.password) {
+        req.session.user = { username: user.username };
+        res.redirect("/login");
+    } else {
+        res.render("/login", { errorMsg: "invalid username or password!"});
+    }
+})
 ////
 
 app.use((req,res)=>{
